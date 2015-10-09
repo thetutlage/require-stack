@@ -1,6 +1,6 @@
 {
   "name": "require-stack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Returns syntax error while requiring modules under try/catch, which is missing by default",
   "main": "index.js",
   "scripts": {
