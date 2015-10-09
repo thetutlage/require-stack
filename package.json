@@ -1,0 +1,25 @@
+{
+  "name": "require-stack",
+  "version": "1.0.0",
+  "description": "Returns syntax error while requiring modules which are not sent by v8",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "syntax-error",
+    "require-stack",
+    "require-error-trace"
+  ],
+  "author": "amanvirk",
+  "license": "MIT",
+  "dependencies": {
+    "syntax-error": "^1.1.4"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "istanbul": "^0.3.22",
+    "mocha": "^2.3.3",
+    "ouch": "^0.2.0-beta"
+  }
+}
