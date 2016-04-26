@@ -1,5 +1,2 @@
 
-function foo(){
-}
-
-foo('index)
+let foo = 'bar'

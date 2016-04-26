@@ -4,7 +4,8 @@
   "description": "Returns syntax error while requiring modules under try/catch, which is missing by default",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test --reporter spec --check-leaks --bail"
+    "test": "mocha test --reporter spec --check-leaks --bail",
+    "standard": "standard src/*.js"
   },
   "keywords": [
     "syntax-error",
@@ -20,6 +21,7 @@
     "chai": "^3.3.0",
     "istanbul": "^0.3.22",
     "mocha": "^2.3.3",
-    "ouch": "^0.2.0-beta"
+    "ouch": "^0.2.0-beta",
+    "standard": "^6.0.8"
   }
 }
