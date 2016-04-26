@@ -25,7 +25,7 @@ const getRequirePath = function (requirePath) {
   if (start !== './' && start !== '..') {
     return requirePath
   }
-  return path.join(path.dirname(module.parent.parent.filename),requirePath)
+  return path.join(path.dirname(module.parent.parent.filename), requirePath)
 }
 
 /**
@@ -38,14 +38,12 @@ const getRequirePath = function (requirePath) {
  * @public
  */
 const requireStack = function requireStack (requirePath) {
-
   requirePath = getRequirePath(requirePath)
 
-  try{
+  try {
     return require(requirePath)
-  }catch (e){
-
-    if(e.name !== 'SyntaxError'){
+  } catch (e) {
+    if (e.name !== 'SyntaxError') {
       throw e
     }
 
@@ -53,15 +51,22 @@ const requireStack = function requireStack (requirePath) {
     const check = require('syntax-error')
     const filePath = require.resolve(requirePath)
     const fileSrc = fs.readFileSync(filePath)
-    const errors = check(fileSrc,filePath)
-    const errorsArray = errors.toString().split("\n")
-
-    errors.message = errors.message + " " + errorsArray[2]
-    const file = filePath + ":" + errors.line + ":" + errors.column
-    errors.stack = errors.toString() + "\n at "+errorsArray[2]+" ("+file+")"
+    const errors = check(fileSrc, filePath)
+    /**
+     * strict mode errors are not parsed by acorn and returns undefined
+     * In that, we modify the actual stack trace and re-throw it.
+     * Which is better than throwing undefined errors.
+     */
+    if (!errors) {
+      e.stack = `${e.toString()} \n at ${filePath} (${filePath}:1:1)`
+      throw e
+    }
+    const errorsArray = errors.toString().split('\n')
+    errors.message = errors.message + ' ' + errorsArray[2]
+    const file = filePath + ':' + errors.line + ':' + errors.column
+    errors.stack = errors.toString() + '\n at ' + errorsArray[2] + ' (' + file + ')'
     throw errors
   }
-
 }
 
 requireStack.getRequirePath = getRequirePath
